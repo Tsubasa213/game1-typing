@@ -60,7 +60,7 @@ def draw_menu():
 
 # タイピングゲームを開始する関数
 def start_typing_game(difficulty):
-    global current_word, user_input, word_index, timer, start_ticks, consecutive_correct, mistakes, score
+    global current_word, user_input, word_index, timer, start_ticks, consecutive_correct, mistakes, score, current_selection
     global word_list, display_list
     if difficulty == 'Easy':
         word_list = easy_words_a
@@ -83,6 +83,7 @@ def start_typing_game(difficulty):
     start_ticks = pygame.time.get_ticks()  # タイマー開始時間
     consecutive_correct = 0  # 連続正解数
     mistakes = 0  # 誤答数
+    
 
     # タイピングゲームループ
     typing_game_running = True
@@ -133,36 +134,7 @@ def start_typing_game(difficulty):
 
 # メインループ
 running = True
-while running:
-    # イベント処理
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_UP:
-                current_selection = (current_selection - 1) % len(difficulties)
-            elif event.key == pygame.K_DOWN:
-                current_selection = (current_selection + 1) % len(difficulties)
-            elif event.key == pygame.K_RETURN:
-                if user_input.lower() == current_word.lower():
-                        word_index = random.randint(0, len(word_list) - 1)
-                        current_word = word_list[word_index]
-                        display_word = display_list[word_index]
-                        user_input = ''
-                        score += 1000  # 正解したらスコアを1000増やす
-                else:
-                    user_input = ''
-                    mistakes += 1  # 誤答数を増やす
-                    timer -= 0.5  # 誤答でタイマーを0.5秒減らす
-                    consecutive_correct = 0  # 連続正解数をリセット
 
-
-
-    # 難易度選択メニューの描画
-    draw_menu()
-
-    # 画面の更新
-    pygame.display.flip()
 
 # 難易度選択後にゲームを開始する
 selected_difficulty = difficulties[current_selection]
