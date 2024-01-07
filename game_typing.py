@@ -79,7 +79,7 @@ def start_typing_game(difficulty):
     user_input_surface = japanese_font.render(user_input, True, WHITE)
 
     # タイマーの初期化
-    timer = 100  # タイマーの初期値（秒）
+    timer = 10  # タイマーの初期値（秒）
     start_ticks = pygame.time.get_ticks()  # タイマー開始時間
     consecutive_correct = 0  # 連続正解数
     mistakes = 0  # 誤答数
@@ -93,26 +93,31 @@ def start_typing_game(difficulty):
         seconds_passed = (current_ticks - start_ticks) / 1000.0
         timer -= seconds_passed
         start_ticks = current_ticks
-        
-        if timer <= 0:
-            print("時間切れです！")
-            typing_game_running = False
-            break
+
+            
         
         # イベント処理
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
+                sys.exit()
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    current_selection = (current_selection - 1) % len(difficulties)
-                elif event.key == pygame.K_DOWN:
-                    current_selection = (current_selection + 1) % len(difficulties)
+                if event.key == pygame.K_BACKSPACE:
+                    user_input = user_input[:-1]
                 elif event.key == pygame.K_RETURN:
-                    # 難易度選択後にゲームを開始する
-                    selected_difficulty = difficulties[current_selection]
-                    start_typing_game(selected_difficulty)
-                    running = False  # ゲームを開始したらメインループを終了する
+                    if user_input == current_word:
+                        score += 1000
+                        consecutive_correct += 1
+                    else:
+                        score -= 500
+                        mistakes += 1
+                    # 新しい単語を選ぶ
+                    word_index = random.randint(0, len(word_list) - 1)
+                    current_word = word_list[word_index]
+                    display_word = display_list[word_index]
+                    user_input = ''
+                else:
+                    user_input += event.unicode
 
         # 画面の描画
         screen.fill(BLACK)
@@ -129,16 +134,68 @@ def start_typing_game(difficulty):
         score_rect = score_surface.get_rect(bottomright=(screen_width - 10, screen_height - 10))
         screen.blit(score_surface, score_rect)
 
+        # タイマーが0になったらスコア画面を表示
+        if timer <= 0:
+            typing_game_running = False
+            # 半透明の背景
+            overlay = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
+            overlay.fill((0, 0, 0, 128))  # 半透明の黒
+            screen.blit(overlay, (0, 0))
+            # スコアと正解数、間違った数のテキスト
+            score_text = f"スコア: {score}"
+            correct_text = f"正解数: {consecutive_correct}"
+            mistakes_text = f"間違った数: {mistakes}"
+            texts = [score_text, correct_text, mistakes_text]
+            # テキストを画面の真ん中に上から順に表示
+            for i, text in enumerate(texts):
+                text_surface = japanese_font.render(text, True, WHITE)
+                text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2 - 50 + i * 50))
+                screen.blit(text_surface, text_rect)
+            pygame.display.flip()
+            # エンターキーが押されるまで待機
+            waiting_for_enter = True
+            while waiting_for_enter:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        pygame.quit()
+                        sys.exit()
+                    elif event.type == pygame.KEYDOWN:
+                        if event.key == pygame.K_RETURN:
+                            waiting_for_enter = False
+                            # スコアと打った文字をリセット
+                            score = 0
+                            consecutive_correct = 0
+                            mistakes = 0
+                            user_input = ''
+
+        # スコアが0以下の場合はマイナスを表示
+        score_text = f"スコア: {score}" if score >= 0 else f"スコア: -{abs(score)}"
+        score_surface = japanese_font.render(score_text, True, WHITE)
+        score_rect = score_surface.get_rect(bottomright=(screen_width - 10, screen_height - 10))
+        screen.blit(score_surface, score_rect)
+
         # 画面の更新
         pygame.display.flip()
 
 # メインループ
 running = True
+while running:
+    draw_menu()
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_UP:
+                current_selection = (current_selection - 1) % len(difficulties)
+            elif event.key == pygame.K_DOWN:
+                current_selection = (current_selection + 1) % len(difficulties)
+            elif event.key == pygame.K_RETURN:
+                selected_difficulty = difficulties[current_selection]
+                start_typing_game(selected_difficulty)
+    pygame.display.flip()
 
 
-# 難易度選択後にゲームを開始する
-selected_difficulty = difficulties[current_selection]
-start_typing_game(selected_difficulty)
+
 
 # Pygameの終了
 pygame.quit()
