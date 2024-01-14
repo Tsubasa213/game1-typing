@@ -9,14 +9,14 @@ pygame.init()
 # スコアの初期化
 score = 0
 
-easy_words_a = ["anpanman","ringo","neko","hituji","karaoke","tora","saihu","miso","banana","budou","okaki","mikan","hontou","tenki","taberu","gakkou","hanabi","benkyou","undou","utau","kuuki","tanosii","eiga","hasiru","ongaku","tisiki","jikan","hayai","sensei","akarui","situmon","oisii","hanasu","aoi","egao","yoi","imi","midori","ame","syasin","ryokou","kiru","kaku","syousetu","kanasii","doubutu","iro","heya","siru","omou","yasumu","kau","denwa","asa","mati","okane","kuruma","kusa","hikari","tori","siranai","atatakai","tegami","yoru","miti","genki","e","wasureru","basyo","okiru","huku","asobu","warui","yorokobu","ie","tyousyoku","isogu","kutu","noru","oto","kiru","inu","yuki","kao","okoru","tuyoi","hurui","nimotu","amai","nemuru","owaru","marui","hajimaru","naru","atui","sigoto","takai","tooi","kantan","oyogu","hajimete","kaeru","nozomu","nomu","sizuka","kowai","gakki","hiraku","tomaru","te","isogasii","hiroi"]
-easy_words_b = ["アンパンマン","りんご","ねこ","ひつじ","カラオケ","とら","さいふ","みそ","バナナ","ぶどう","おかき","みかん","本当","天気","食べる","学校","花火","勉強","運動","歌う","空気","楽しい","映画","走る","音楽","知識","時間","速い","先生","明るい","質問","美味しい","話す","青い","笑顔","良い","意味","緑","雨","写真","旅行","着る","書く","小説","悲しい","動物","色","部屋","知る","思う","休む","買う","電話","朝","町","お金","車","草","光","鳥","知らない","暖かい","手紙","夜","道","元気","絵","忘れる","場所","起きる","服","遊ぶ","悪い","喜ぶ","家","朝食","急ぐ","靴","乗る","音","切る","犬","雪","顔","起こる","強い","古い","荷物","甘い","眠る","終わる","丸い","始まる","鳴る","暑い","仕事","高い","遠い","簡単","泳ぐ","初めて","帰る","望む","飲む","静か","怖い","楽器","開く","止まる","手","忙しい","広い"]
+easy_words_a = ["anpanman","ringo","neko","hituji","karaoke","tora","saihu","miso","banana","budou","okaki","mikan"]
+easy_words_b = ["アンパンマン","りんご","ねこ","ひつじ","カラオケ","とら","さいふ","みそ","バナナ","ぶどう","おかき","みかん"]
 
-normal_words_a = ["ryokousaki","ra-men","hanranbunsi","jikkenjissyuu","kateika","pettosyoppu","komyunithi","kenkousindan","o-rudofassyon","toukyoutawa-","syanhai","kyoukankaku","jindousyugi","tyuusyouka","kagakutekisyuhou","biseibutugaku","kasika","kobetuka","titekizaisan","jizokukanousei","seimitukiki","syakaitekieikyou","paradaimusihuto","titekisouzou","utyuuron","sinkasinrigaku","idensiryouhou","inobe-syon","souzouseisikou","guro-baruka","ri-da-sippu","hukuzatusei","ryousirikigaku","tisikikeizai","seisinbunseki","baioesikkusu","koujigen","rezonensu","tyouetusei","singyurarithi","pa-sonarithi","kuusoukagaku","purototaipingu","episutemoroji-","paradokkusu","morarithi"]
-normal_words_b = ["旅行先","ラーメン","反乱分子","実験実習","家庭科","ペットショップ","コミュニティ","健康診断","オールドファッション","東京タワー","上海","共感覚","人道主義","抽象化","科学的手法","微生物学","可視化","個別化","知的財産","持続可能性","精密機器","社会的影響","パラダイムシフト","知識創造","宇宙論","進化心理学","遺伝子療法","イノベーション","創造性思考","グローバル化","リーダーシップ","複雑性","量子力学","知識経済","精神分析","バイオエシックス","高次元","レゾネンス","超越性","シンギュラリティ","パーソナリティ","空想科学","プロトタイピング","エピステモロジー","パラドックス","モラリティ"]
+normal_words_a = ["ryokousaki","ra-men"]
+normal_words_b = ["旅行先","ラーメン"]
 
-hard_word_a = ["dhizuni-rando","osyakasama","maindokontoro-ru","toukyoutokkyokyokakyoku","komyunike-shonnouryoku","chouetutekikeiken","konpyu-tabijon","interijentoe-jento","guro-barunabige-shon","haipa-pafo-mansu","rejirientonettowa-ku","marutimo-daruinta-fe-su","inobe-shonekoshisutemu","enbaiomentarizumu","guro-barumegatorendo","konpyu-te-shonarudezain","inhurasutorakuchamanejimento","maruchisuke-ruapuro-ti","dejitarutuintekunoroji-","shingyurarithiibento","de-tafyu-jontekunoroji-","ba-charuriarithiekusuperiensu","intarakuthibua-tofi-rudo","burrokutye-ntekunoroji-","nonbaiorojikaruraihu","saiba-sekyurithipurotokoru","interijentorimo-tosensingu","bbigude-taanarithikusu","sasutenabirithiinobe-shon"]
-hard_word_b = ["ディズニーランド","お釈迦様","マインドコントロール","東京特許許可局","コミュニケーション能力","超越的経験","コンピュータビジョン","インテリジェントエージェント","グローバルナビゲーション","ハイパーパフォーマンス","レジリエントネットワーク","マルチモーダルインターフェース","イノベーションエコシステム","エンバイオメンタリズム","グローバルメガトレンド","コンピューテーショナルデザイン","インフラストラクチャマネジメント","マルチスケールアプローチ","デジタルツインテクノロジー","シンギュラリティイベント","データフュージョンテクノロジー","バーチャルリアリティエクスペリエンス","インタラクティブアートフィールド","ブロックチェーンテクノロジー","ノンバイオロジカルライフ","サイバーセキュリティプロトコル","インテリジェントリモートセンシング","ビッグデータアナリティクス","サステナビリティイノベーション"]
+hard_word_a = ["dhizuni-rando"]
+hard_word_b = ["ディズニーランド"]
 
 # 画面の設定
 screen_width = 640
@@ -28,6 +28,9 @@ pygame.display.set_caption('タイピングゲーム')
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (0, 0, 255)
+
+# ランキングを保存するリスト（初期値は空）
+ranking = []
 
 # フォントの設定
 font = pygame.font.Font(None, 50)
@@ -57,9 +60,18 @@ def draw_menu():
         position = label.get_rect(center=(screen_width // 2, screen_height // 2 + i * 60))
         screen.blit(label, position)
 
+# ランキングを表示する関数
+def show_ranking():
+    ranking_surface = japanese_font.render("ランキング:", True, WHITE)
+    screen.blit(ranking_surface, (screen_width - 200, 10))  # 位置を調整
+    for i, rank_score in enumerate(ranking[:5]):  # 上位5位のみ表示
+        rank_text = f"{i + 1}. {rank_score}"
+        rank_surface = japanese_font.render(rank_text, True, WHITE)
+        screen.blit(rank_surface, (screen_width - 200, 50 + i * 40))
+
 # タイピングゲームを開始する関数
 def start_typing_game(difficulty):
-    global current_word, user_input, word_index, timer, start_ticks, consecutive_correct, mistakes, score, current_selection
+    global current_word, user_input, word_index, timer, start_ticks, consecutive_correct, mistakes, score, current_selection, ranking
     global word_list, display_list
     if difficulty == 'Easy':
         word_list = easy_words_a
@@ -78,7 +90,7 @@ def start_typing_game(difficulty):
     user_input_surface = japanese_font.render(user_input, True, WHITE)
 
     # タイマーの初期化
-    timer = 60  # タイマーの初期値（秒）
+    timer = 10  # タイマーの初期値（秒）
     start_ticks = pygame.time.get_ticks()  # タイマー開始時間
     consecutive_correct = 0  # 連続正解数
     mistakes = 0  # 誤答数
@@ -133,9 +145,15 @@ def start_typing_game(difficulty):
         score_rect = score_surface.get_rect(bottomright=(screen_width - 10, screen_height - 10))
         screen.blit(score_surface, score_rect)
 
+
         # タイマーが0になったらスコア画面を表示
         if timer <= 0:
             typing_game_running = False
+            # スコアをランキングに追加してソート
+            ranking.append(score)
+            ranking.sort(reverse=True)
+            ranking = ranking[:5]  # 上位5位までを保持
+
             # 半透明の背景
             overlay = pygame.Surface((screen_width, screen_height), pygame.SRCALPHA)
             overlay.fill((0, 0, 0, 128))  # 半透明の黒
@@ -151,6 +169,12 @@ def start_typing_game(difficulty):
                 text_rect = text_surface.get_rect(center=(screen_width // 2, screen_height // 2 - 50 + i * 50))
                 screen.blit(text_surface, text_rect)
             pygame.display.flip()
+            # ランキングの表示
+            show_ranking()
+            # 画面の更新
+            pygame.display.flip()
+
+
             # エンターキーが押されるまで待機
             waiting_for_enter = True
             while waiting_for_enter:
@@ -161,11 +185,13 @@ def start_typing_game(difficulty):
                     elif event.type == pygame.KEYDOWN:
                         if event.key == pygame.K_RETURN:
                             waiting_for_enter = False
-                            # スコアと打った文字をリセット
-                            score = 0
-                            consecutive_correct = 0
-                            mistakes = 0
-                            user_input = ''
+            # スコアと打った文字をリセット
+            score = 0
+            consecutive_correct = 0
+            mistakes = 0
+            user_input = ''
+
+
 
         # スコアが0以下の場合はマイナスを表示
         score_text = f"スコア: {score}" if score >= 0 else f"スコア: -{abs(score)}"
@@ -173,9 +199,7 @@ def start_typing_game(difficulty):
         score_rect = score_surface.get_rect(bottomright=(screen_width - 10, screen_height - 10))
         screen.blit(score_surface, score_rect)
 
-        # 画面の更新
-        pygame.display.flip()
-
+        
 # メインループ
 running = True
 while running:
@@ -201,8 +225,11 @@ pygame.quit()
 sys.exit()
 
 
-# 今後すること
 
-#レイアウトを整える
-#単語増やす
-#注意書きの実装
+# 時間があれば…
+
+# ゲームを実行中にプレイヤーが入力しているとき，今入力している文字だけ色が変わるようにする
+# →そのためにはあらかじめ灰色などでローマ字を表示して現在入力しているところのみ赤色にするなどのプログラムが必要
+
+
+# またリトライしたら過去のベストスコアを参照(表示)出来るようにしているとなおゲーム性が出てくる
